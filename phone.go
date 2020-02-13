@@ -2,8 +2,9 @@ package phonecallingcodecountry
 
 import (
 	"errors"
-	"phonecallingcodecountry/world"
 	"strings"
+
+	"github.com/vikram1565/phonecallingcodecountry/world"
 )
 
 // Phone interface
@@ -39,15 +40,15 @@ func (w *PhoneWorld) FindCountry(phoneNumber string) (string, error) {
 	names := ""
 	for currentCountry.Next != nil {
 		if strings.HasPrefix(phoneNumber, currentCountry.Code) {
-			names += currentCountry.Name + ","
+			names += currentCountry.Name + ", "
 		}
 		currentCountry = currentCountry.Next
 	}
 	if names == "" {
 		return "", errors.New("country not found")
 	}
-	if strings.HasSuffix(names, ",") {
-		names = names[:len(names)-len(",")]
+	if strings.HasSuffix(names, ", ") {
+		names = names[:len(names)-len(", ")]
 	}
 	return names, nil
 }
